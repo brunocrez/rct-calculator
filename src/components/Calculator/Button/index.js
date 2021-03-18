@@ -1,5 +1,7 @@
+import './styles.css';
+
 export default function Button({ label }) {
   return (
-    <button>{label}</button>
+    <button className="button">{label}</button>
   );
 }
