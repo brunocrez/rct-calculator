@@ -1,6 +1,6 @@
 import './styles.css';
 
-export default function Button({ label, double, triple, operation }) {
+export default function Button({ label, double, triple, operation, click }) {
 
   let classes = 'button ';
   classes += double ? 'double' : '';
@@ -8,6 +8,10 @@ export default function Button({ label, double, triple, operation }) {
   classes += operation ? 'operation' : ''
 
   return (
-    <button className={classes}>{label}</button>
+    <button
+      onClick={() => click(label)}
+      className={classes}>
+        {label}
+    </button>
   );
 }
