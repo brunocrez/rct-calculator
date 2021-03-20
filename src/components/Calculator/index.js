@@ -42,6 +42,41 @@ export default class Calculator extends Component {
   }
 
   setOperation(operation) {
+
+    if (this.state.index == 0) {
+      this.setState({ clearDisplay: true, index: 1, operation });
+    } else {
+      const values = [...this.state.values];
+      const currentOp = this.state.operation;
+      const equals = operation === '=';
+
+      switch (currentOp) {
+        case '/':
+          values[0] = parseFloat(values[0]) / parseFloat(values[1]);
+          values[1] = 0;
+          break;
+        case '*':
+          values[0] = parseFloat(values[0]) * parseFloat(values[1]);
+          values[1] = 0;
+          break;
+        case '+':
+          values[0] = parseFloat(values[0]) + parseFloat(values[1]);
+          values[1] = 0;
+          break;
+        default:
+          values[0] = parseFloat(values[0]) - parseFloat(values[1]);
+          values[1] = 0;
+          break;
+      }
+      
+      this.setState({ 
+        displayValue: values[0], 
+        operation: equals ? null : operation,
+        clearDisplay: !equals, 
+        index: equals ? 0 : 1, 
+        values 
+      });
+    }
   }
 
   clearEverything() {
